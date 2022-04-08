@@ -1,35 +1,34 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 
 class ArticleForm extends React.Component<{}, {title: string, content: string}> {
     constructor(props: any) {
         super(props);
         this.state = {
-            title: '',
+            title: '', 
             content: ''
         };
 
-    this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.handleChangeContent= this.handleChangeContent.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
-    handleChangeTitle(event: any) {
+    handleChangeTitle = (event: any) => {
         this.setState({title: event.target.value});
       }
 
-    handleChangeContent(event: any) {
+    handleChangeContent = (event: any) => {
     this.setState({content: event.target.value});
     }
     
-    handleSubmit(event: any) {
+    handleSubmit = (event: any) => {
     console.log('Title: ' + this.state.title, 'Content: ' + this.state.content);
     event.preventDefault();
     const newPost = {
         title: this.state.title,
         content: this.state.content
         }
+    const data = JSON.stringify(newPost);
+    console.log(data)
     }
+
 
     render() {
         return (
