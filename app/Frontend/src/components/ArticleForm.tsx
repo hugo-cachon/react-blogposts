@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 
 class ArticleForm extends React.Component<{}, {title: string, content: string}> {
     constructor(props: any) {
@@ -17,7 +17,7 @@ class ArticleForm extends React.Component<{}, {title: string, content: string}> 
     handleChangeContent = (event: any) => {
     this.setState({content: event.target.value});
     }
-    
+
     handleSubmit = (event: any) => {
     console.log('Title: ' + this.state.title, 'Content: ' + this.state.content);
     event.preventDefault();
@@ -26,10 +26,20 @@ class ArticleForm extends React.Component<{}, {title: string, content: string}> 
         content: this.state.content
         }
     const data = JSON.stringify(newPost);
-    console.log(data)
-    }
 
+    const headers = new Headers({
+        'Content-type': 'application/x-www-form-urlencoded'
+    });
 
+    const requestOptions = {
+        headers: headers,
+        method: "POST",
+        body: data,
+    };
+
+    fetch('http://localhost:2345/api/create.php', requestOptions)
+    .then(response => console.log(response.status))
+}
     render() {
         return (
             <form style={{maxWidth: "18rem"}} onSubmit={this.handleSubmit} >

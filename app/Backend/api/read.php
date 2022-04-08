@@ -18,7 +18,6 @@ if($_SERVER["REQUEST_METHOD"] == 'GET'){
     if($stmt->rowCount() > 0)
     {
         $posts_array = [];
-        $posts_array["posts"] = [];
 
         while($row = $stmt->fetch(PDO::FETCH_ASSOC))
         {
@@ -30,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == 'GET'){
                 "content" => $content
             ];
 
-            $posts_array["posts"][] = $data;
+            $posts_array[] = $data;
         }
 
         http_response_code(200);
